@@ -1,2 +1,13 @@
-<h1>Pokemon#new</h1>
-<p>Find me in app/views/pokemon/new.html.erb</p>
+<h1>Pokemon</h1>
+<%= render "search", { path: pokemon_new_path } %>
+<div>
+  <% if @results.present? %>
+    <p><%= @results["id"] %></p>
+    <p><%= @results["name"] %></p>
+    <div>
+      <%= image_tag(@results["sprites"]["front_default"], size: "300") %>
+    </div>
+  <% else %>
+    <p>エラー！！</p>
+  <% end %>
+</div>
