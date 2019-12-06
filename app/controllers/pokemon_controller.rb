@@ -1,10 +1,9 @@
 class PokemonController < ApplicationController
   def new
-    search_params = params[:search]
-    response = Faraday.get "https://pokeapi.co/api/v2/pokemon/#{search_params}"
-
-    if response.status == 200
-      @results = JSON.parse(response.body)
+    if params[:search].present?
+      search_params = params[:search]
+      @client = ApiClient.new
+      @pokemon = @client.get_pokemon(search_params)
     end
   end
 end
