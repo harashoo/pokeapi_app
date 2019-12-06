@@ -6,4 +6,8 @@ class PokemonController < ApplicationController
       @pokemon = @client.get_pokemon(search_params)
     end
   end
+
+  def create
+    
+  end
 end
