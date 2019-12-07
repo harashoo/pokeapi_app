@@ -1,0 +1,34 @@
+<h1>Pokemon</h1>
+<%= render "shared/search", { path: new_pokemon_path } %>
+<div>
+  <% if @pokemon.present? %>
+    <% if @pokemon.errors.present? %>
+      <ul id="error_explanation">
+        <% @pokemon.errors.full_messages.each do |message| %>
+          <li class="text-danger"><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    
+    <table>
+      <tr>
+        <td>No.</td>
+        <td><%= @pokemon.order %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= @pokemon.name %></td>
+      </tr>
+    </table>
+    <%= image_tag(@pokemon.image_url, size: "200") %>
+
+    <%= form_with model: @pokemon, url: pokemons_path, local: true do |f| %>
+      <%= f.hidden_field :order  %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :image_url %>
+      <%= f.submit 'ゲット', name: nil %>
+    <% end %>
+  <% else %>
+    <p>検索してね！</p>
+  <% end %>
+</div>
