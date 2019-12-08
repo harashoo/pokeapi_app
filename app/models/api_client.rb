@@ -14,10 +14,7 @@ class ApiClient
   end
 
   def response(raw_response)
+    return OpenStruct.new({ status: raw_response.status }) if raw_response.status != 200
     JSON.parse(raw_response.body, object_class: OpenStruct)
-    # OpenStruct.new({
-    #   status: raw_response.status,
-    #   body: JSON.parse(raw_response.body, object_class: OpenStruct)
-    # })
   end
 end

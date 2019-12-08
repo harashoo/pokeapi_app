@@ -1,3 +1,15 @@
-<% @pokemons.each do |pokemon| %>
-  <%= image_tag(pokemon.image_url, size: "200") %>
-<% end %>
+<h1>Pokemon</h1>
+<%= render "shared/search", { path: new_pokemon_path } %>
+<div>
+  <% if @pokemons.present? %>
+    <% @pokemons.each do |pokemon| %>
+      <div style="display: inline-block;">
+        No. <%= pokemon.order %>,
+        Name: <%= pokemon.name %>
+        <div>
+          <%= image_tag(pokemon.image_url, size: "200") %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

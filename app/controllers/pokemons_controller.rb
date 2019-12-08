@@ -5,8 +5,14 @@ class PokemonsController < ApplicationController
 
   def new
     return if params[:search].blank?
+
     client = ApiClient.new
     response = client.get_pokemon(params[:search])
+
+    if response.status != 200
+      return redirect_to new_pokemon_path, notice: "#{response.status}エラー！"
+    end
+
     @pokemon = Pokemon.new(order: response.id, name: response.name, image_url: response.sprites.front_default)
   end
 
